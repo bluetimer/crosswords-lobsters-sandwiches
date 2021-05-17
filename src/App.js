@@ -8,7 +8,8 @@ export default function App() {
     <div className="App">
       <h1> Crossword Game! </h1>
       <button> Check </button>
-      <GameBoard data={data.answerKey} />
+      <GameBoard data={data.answerKey} clueKeys={data.clueKey} />
+
       <table>
         <tr>
           <th> Across</th>
@@ -26,9 +27,27 @@ export default function App() {
     </div>
   );
 }
+// line 11: clueKey is to have the textboxes labeled
+// from the beginning of the word
 
 export function InputComponent(props) {
-  return <input type="textbox" size="1" />;
+  //https://stackoverflow.com/questions/38420396/how-to-get-value-of-textbox-in-react
+  // Add value as a state variable
+  // onChange, set the state variable with the new value
+  let correctLetter = props.letter;
+  //const [value, setValue] = useState("");
+
+  // function onCheck() {
+  //   if (textbox.value !== correctLetter) {
+  //   //
+  //   }
+
+  //   //need to put onchage input
+
+  // }
+  //need to put on change input
+  // () => onchange (e) => setValue(e.target.value)
+  return <input type="textbox" name="inputComponent" size="1" />;
 }
 
 export function EmptySpace() {
@@ -64,7 +83,7 @@ export function AcrossClues(props) {
     </div>
   );
 }
-
+//missing ability if the user input === answer key
 export function DownClues(props) {
   // props is an array
   // Loop over props and pass each clue into the clue component
@@ -78,6 +97,7 @@ export function DownClues(props) {
 }
 
 export function GameBoard(props) {
+  // props.clueKey
   return (
     <table>
       {props.data.map((innerArray) => {
